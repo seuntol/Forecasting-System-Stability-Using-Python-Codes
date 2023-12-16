@@ -1,2 +1,3 @@
 # Tracking GHG Emission in Canada
-## Tools -Python-Codes
+## Methodology - Multivariate Linear Regression
+## Tools - Python Programming language
