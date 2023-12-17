@@ -6,7 +6,7 @@
 This project involves using Multivariate regression to analyze potential economic contributors to GHG emission in Canada. 
 
 # Scope
-The scope of this analysis will cover from 1995 to 2019. The analysis involves the six stages of data analysis; ask, prepare, process, analyse, share and act
+The scope of this analysis will cover the period from 1995 to 2019. The analysis involves the six stages of data analysis; ask, prepare, process, analyse, share and act
 
 The project will include each phases of the data analysis process: ask, prepare, process, analyze, share, act.
 
