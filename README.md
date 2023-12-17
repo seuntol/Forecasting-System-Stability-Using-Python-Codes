@@ -2,59 +2,68 @@
 ### Methodology - Multivariate Linear Regression
 ### Tools - Python Programming language
 
-# Consumer Behaviour Bike Share Analysis 
-
 # Objective
-This project involves using R Studio to deliver on the role assigned to me in determining the behavioural patterns of two categories of users of a bike share service. 
+This project involves using Multivariate regression to analyze potential economic contributors to GHG emission in Canada. 
 
 # Scope
-The scope of this analysis will cover from May 2022 to June 2023. The analysis involves the six stages of data analysis; ask, prepare, process, analyse, share and act
+The scope of this analysis will cover from 1995 to 2019. The analysis involves the six stages of data analysis; ask, prepare, process, analyse, share and act
 
 The project will include each phases of the data analysis process: ask, prepare, process, analyze, share, act.
 
 # Background Information
-The analysis is for Cyclistic a bike share program that features more than 5,800 bicycles. The program has two types of subscribers; the member and the casual subscribers. Riders with annualmemberships are refeered to as members while customers that purchase single ride or full day passes are referred to as casual riders.
-
-Cyclistics financial analyst discovered that annual members are more profitable than casual members and recommends strategizing on how to convert the casual riders into members. My team is tasked to analyze the Cyclistics historical bike trip data to identify trends.
+Understanding complex relationships between greenhouse gas (GHG) emissions and human activities in Canada is crucial. This analysis aims to inform effective policies by exploring the dynamic interactions, identifying key drivers, and assessing regional and temporal variations for targeted emissions reduction strategies.
 
 # Ask
-Lili Moreno my team lead has assigned to me to use data to analyze how annual members and casual riders use Cyclistic bikes differently. I adopted the following report guide in achieving my task:
+The project aims to inform Canadian policymakers by analyzing historical data (1995-2019) on greenhouse gas (GHG) emissions. Using multivariate regression, it seeks insights into the complex relationship between GHG emissions and human activities, considering spatial and temporal variations for effective policy formulation and emissions reduction strategies.
 - A clear statement of the business task
 - A description of all data sources used
-- Documentation of any cleaning or data manipulation
 - Summary of your analysis Supporting visuals and
 - key findings Your top three recommendations, based on your analysis
 
 Business Task: 
-- define the differences in Cyclstic bike use between casual riders and annual members,
-- then recommend marketing strategies aimed at converting those casual riders (single-rider and full-day pass holders) into annual members.
+- Create a base model for analyzing the economic activities impacting GHG emission in Canada,
+- then make recommendation to guide policy makers in reducing GHG gas emission .
   
-Stakeholders: Lily Moreno, Director of Marketing, Cyclistic executive team.
+Stakeholders: seun, policy makers and mankind.
+
+
 
 # Prepare Phase
-The data has been made available by Motivate International, under license were provided under license. Limitations to the data include: using riders' personally identifiable information, in order to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes.
+The data for this project was sourced from various segments within the Organization for Economic Cooperation and Development (OECD) database, which is a reliable and comprehensive source of economic and social statistics for 37 member countries and several partner countries. The data comprises of 12 variables that are related to greenhouse gas (GHG) emissions and human activities in Canada, such as energy consumption, household spending, transportation, industrial production, and trade. The data spans from 1995 to 2019, which covers a period of significant changes and developments in the Canadian economy and society. The data dimension is 25 x 11 (row by column), which means that there are 25 observations (one for each year) and 11 independent variables (excluding the dependent variable, which is GHG emissions).
 
-Data was downloaded from the AWS server as zip files and saved as .csv files on a local hard drive. The .csv files were then uploaded to Kaggle as a dataset named "cyclistic-historical-data." You may download the data through the link in he Data folder in this repository.
 
 ## Process Phase (see code folder)
 
 ## Analyze (see code folder)
 
 # Share Phase
-Insights: We deduce from the frequency plot that casual subscribers are mostly weekend users reflecting the high rate from Friday to Sunday.
+Insights: The model explained 82% of the variation in GHG emissions, which means that it had a high explanatory power and accuracy.
 
-They also have a longer average_duration compared to the member subscriber.
+The most important factors that influenced GHG emissions were industrial production, trade, crude oil production, and inflation. These factors had a significant and strong impact on GHG emissions.
 
-The streeter Dr & Grand Avenue have the most casual users start station while most annual member subscribers start station are at Kingsbury St & Kinzie st.
+
 
 ### Recommendations: 
-Based on our findings, I will recommend that a member subscription for weekend users be further investigated for approval. This will encourage casual users to possibly subscribe for this plan.
+The government should use the model to evaluate the potential effects of different policies and scenarios on GHG emissions reduction, and to design effective and efficient strategies to achieve the GHG emissions targets.
+The project team should conduct further analysis to compare the model with other models, and to test the validity and robustness of the results. The project team should also consider collecting and analysing primary data, if more time and resources are available.
 
-I will also recommend a membership plan focussed around average long term users. This could be an incentive for average long duration casual users to subscribe for the member plan.
-
-Focus of awareness should be around streeter Dr & Grand Avenue as its the most popular for casual subscribers. Increasing awareness and focussing future strategy in this region has a higher probability of getting more casual subscribers convert to annual members.
 
 # Resources
-- https://tidyverse.org
-- https://cran.r-project.org
 - https://stackoverflow.com
+- https://data.oecd.org/hha/household-spending.htm#indicator-chart
+- https://data.oecd.org/trade/trade-in-goods-and-services.htm#indicator-chart
+- https://data.oecd.org/energy/crude-oil-import-prices.htm#indicator-chart
+- https://data.oecd.org/transport/infrastructure-investment.htm#indicator-chart
+- https://data.oecd.org/air/air-and-ghg-emissions.htm
+- https://data.oecd.org/pop/population.htm
+- https://data.oecd.org/energy/electricity-generation.htm
+- https://data.oecd.org/price/inflation-cpi.htm
+- United-Nations. (n.d.). Causes and effect of Climate Change. Retrieved from United Nations: https://www.un.org/en/climatechange/science/causes-effects-climate-change#:~:text=As%20greenhouse%20gas%20emissions%20blanket,the%20usual%20balance%20of%20nature.
+- Izzet, K., & Gokhan, A. (2023). Development of regression models to forecast the CO2 emissions from fossil fuels in the BRICS and MINT countries. Energy.
+- Yefan Zhou et al  (2018). The impact of economic growth and energy consumption on carbon emissions: evidence from panel quantile regression. Journal of Physics.
+- Gail Cohen et al (2018). The Long-Run Decoupling of Emissions and Output: Evidence from the Largest Emitters . IMF Working Paper.
+
+
+
+
+
