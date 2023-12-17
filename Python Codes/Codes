@@ -1,1 +1,198 @@
+``` py
+#Load Libraries
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
 
+
+#Load Dataset
+data=pd.read_csv('./capcc.csv') #capcc is the csv data loaded from my hard drive
+data.head()
+
+
+#Drop Model Column
+data2=data.drop('year', axis = 1)
+data2.head()
+
+
+#Create Standard Model
+
+#Define x and y variable
+x = data2.drop('GHG Emission',axis=1).to_numpy()
+y = data2['GHG Emission'].to_numpy()
+
+# Create Train and Test Datasets
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=100)
+
+#Scale the Data
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+x_train2 = sc.fit_transform(x_train)
+x_test2 = sc.transform(x_test)
+
+#Model
+from sklearn.linear_model import LinearRegression
+
+
+#Create Model
+
+from sklearn import metrics
+
+for name,method in [('Linear regression', LinearRegression())]: 
+    method.fit(x_train2,y_train)
+    predict = method.predict(x_test2)
+
+print('\nOriginal Model')
+print('\nMethod: {}'.format(name))   
+
+#Coefficents
+print('\nIntercept: {:.2f}'.format(float(method.intercept_)))
+coeff_table=pd.DataFrame(np.transpose(method.coef_),data2.drop('GHG Emission',axis=1).columns,columns=['Coefficients'])
+print(coeff_table)
+    
+#R2,MAE,MSE and RMSE
+print('\nR2: {:.2f}'.format(metrics.r2_score(y_test,predict)))
+adjusted_r_squared = 1-(1-metrics.r2_score(y_test,predict))*(len(y)-1)/(len(y)-x.shape[1]-1)
+print('Adj_R2: {:0.2f}'.format(adjusted_r_squared))
+print('Mean Absolute Error: {:.2f}'.format(metrics.mean_absolute_error(y_test, predict)))  
+print('Mean Squared Error: {:.2f}'.format(metrics.mean_squared_error(y_test, predict)))  
+print('Root Mean Squared Error: {:.2f}'.format(np.sqrt(metrics.mean_squared_error(y_test, predict)))) 
+
+
+#Create Tranformed Model
+for name,model_trf in [('Linear regression', LinearRegression())]: 
+    model_trf.fit(x_train_trf,y_train_trf)
+    predict = model_trf.predict(x_test_trf)
+
+print('\nTransformed Model - Yeo-Johnson')
+print('\nMethod: {}'.format(name)) 
+
+#Coefficents
+print('\nIntercept: {:0.2f}'.format(float(model_trf.intercept_)))
+print('\n')
+coeff_table2=pd.DataFrame(np.transpose(model_trf.coef_),dataset_trf.drop('GHG Emission',axis=1).columns,
+                          columns=['Model Coefficients'])
+print(coeff_table)
+    
+#R2 and RMSE
+print('\nR2: {:0.2f}'.format(metrics.r2_score(y_test_trf,predict)))
+adjusted_r_squared2 = 1-(1-metrics.r2_score(y_test_trf,predict))*(len(y_trf)-1)/(len(y_trf)-x_trf.shape[1]-1)
+print('Adj_R2: {:0.2f}'.format(adjusted_r_squared2))
+print('Root Mean Squared Error: {:0.2f}'.format(np.exp(np.sqrt(metrics.mean_squared_error(y_test_trf, predict))))) 
+
+
+#Feature Selection 
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_regression
+from sklearn.feature_selection import mutual_info_regression
+
+def select_featuresCFS(x_train, y_train, x_test):
+    # configure to select all features
+    fs = SelectKBest(score_func=f_regression, k='all')
+    # learn relationship from training data
+    fs.fit(x_train, y_train)
+    # transform train input data
+    X_train_fs = fs.transform(x_train)
+    # transform test input data
+    X_test_fs = fs.transform(x_test)
+    return X_train_fs, X_test_fs, fs
+
+def select_featuresMI(x_train, y_train, x_test):
+    # configure to select all features
+    fs2 = SelectKBest(score_func=mutual_info_regression, k='all')
+    # learn relationship from training data
+    fs2.fit(x_train, y_train)
+    # transform train input data
+    X_train_fs2 = fs2.transform(x_train)
+    # transform test input data
+    X_test_fs2 = fs2.transform(x_test)
+    return X_train_fs2, X_test_fs2, fs2
+
+
+# feature selection - CFS
+X_train_fs, X_test_fs, fs = select_featuresCFS(x_train, y_train, x_test)
+fs_table=pd.DataFrame(np.transpose(fs.scores_),data2.drop('GHG Emission',axis=1).columns,
+                          columns=['Feature Importance'])
+print('Correlaton Feature Selection')
+print(fs_table.sort_values(by=['Feature Importance'], ascending=False))
+
+# feature selection - MI
+X_train_fs2, X_test_fs2, fs2 = select_featuresMI(x_train, y_train, x_test)
+fs_table2=pd.DataFrame(np.transpose(fs2.scores_),data2.drop('GHG Emission',axis=1).columns,
+                          columns=['Feature Importance'])
+print('\n')
+print('Mutual Information Feature Selection')
+print(fs_table2.sort_values(by=['Feature Importance'],ascending=True))
+
+
+# The last code above helps ranks the importance of our features. We create a new jupyter note book to run the codes for our newly selected features
+
+#Load Libraries
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+
+
+#Load Dataset
+data=pd.read_csv('./capcc.csv')
+data.head()
+
+
+#Drop columns leaving the most important features 
+columns_to_drop = ['year', 'Household Spending', 'Transport Investment','Population','CrudeOil Prices','Electricity Generation']  # Add the column names you want to drop to this list
+data2 = data.drop(columns=columns_to_drop)
+data2.head()
+
+
+#Create Standard Model
+
+#Define x and y variable
+x = data2.drop('GHG Emission',axis=1).to_numpy()
+y = data2['GHG Emission'].to_numpy()
+
+# Create Train and Test Datasets
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=100)
+
+#Scale the Data
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+x_train2 = sc.fit_transform(x_train)
+x_test2 = sc.transform(x_test)
+
+#Model
+from sklearn.linear_model import LinearRegression
+
+
+#Create Model
+
+from sklearn import metrics
+
+for name,method in [('Linear regression', LinearRegression())]: 
+    method.fit(x_train2,y_train)
+    predict = method.predict(x_test2)
+
+print('\nOriginal Model')
+print('\nMethod: {}'.format(name))   
+
+#Coefficents
+print('\nIntercept: {:.2f}'.format(float(method.intercept_)))
+coeff_table=pd.DataFrame(np.transpose(method.coef_),data2.drop('GHG Emission',axis=1).columns,columns=['Coefficients'])
+print(coeff_table)
+    
+#R2,MAE,MSE and RMSE
+print('\nR2: {:.2f}'.format(metrics.r2_score(y_test,predict)))
+adjusted_r_squared = 1-(1-metrics.r2_score(y_test,predict))*(len(y)-1)/(len(y)-x.shape[1]-1)
+print('Adj_R2: {:0.2f}'.format(adjusted_r_squared))
+print('Mean Absolute Error: {:.2f}'.format(metrics.mean_absolute_error(y_test, predict)))  
+print('Mean Squared Error: {:.2f}'.format(metrics.mean_squared_error(y_test, predict)))  
+print('Root Mean Squared Error: {:.2f}'.format(np.sqrt(metrics.mean_squared_error(y_test, predict)))) 
+
+```
